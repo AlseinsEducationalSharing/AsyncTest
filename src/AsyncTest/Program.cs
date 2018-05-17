@@ -17,7 +17,7 @@ namespace AsyncTest
         private static async Task<int> B()
         {
             await Task.Delay(3000);
-            return 5;
+            return 10;
         }
     }
 }
