@@ -5,19 +5,29 @@ namespace AsyncTest
 {
     class Program
     {
+        private static int num = 6;
         static void Main(string[] args)
         {
-            var task = A();
-            Console.WriteLine("A is running...");
-            Console.WriteLine(task.Result);
+            A();
+            //num = Console.ReadKey(true).KeyChar;
+            int sum = 0;
+            while (true)
+            {
+                sum = Console.ReadKey(true).KeyChar - 48;
+                if (sum > 0 && sum < 10)
+                {
+                    num = sum;
+                }
+            }
         }
 
-        private static async Task<int> A() => (await B()) + 1;
-
-        private static async Task<int> B()
+        private static async void A()
         {
-            await Task.Delay(3000);
-            return 10;
+            while (true)
+            {
+                await Task.Delay(1000);
+                Console.WriteLine($"输出了{num}个*");
+            }
         }
     }
 }
