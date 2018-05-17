@@ -1,32 +1,33 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AsyncTest
 {
     class Program
     {
-        private static int num = 6;
+        private static int _num = 6;
+        private static int Num
+        {
+            get => _num;
+            set => _num = value > 0 && value < 10 ? value : _num;
+        }
+
         static void Main(string[] args)
         {
-            A();
-            //num = Console.ReadKey(true).KeyChar;
-            int sum = 0;
+            Output();
             while (true)
             {
-                sum = Console.ReadKey(true).KeyChar - 48;
-                if (sum > 0 && sum < 10)
-                {
-                    num = sum;
-                }
+                Num = Console.ReadKey(true).KeyChar - '0';
             }
         }
 
-        private static async void A()
+        private static async void Output()
         {
             while (true)
             {
                 await Task.Delay(1000);
-                Console.WriteLine($"输出了{num}个*");
+                Console.WriteLine(new string(Enumerable.Range(0, _num).Select(x => '*').ToArray()));
             }
         }
     }
